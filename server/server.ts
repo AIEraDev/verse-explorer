@@ -71,7 +71,7 @@ export const quranClient = new QuranAPIClient({
  */
 app.use(
   cors({
-    origin: process.env.QURAN_CLIENT_URL!, // Frontend URL from environment
+    origin: process.env.NODE_ENV === "production" ? process.env.QURAN_CLIENT_URL_PROD : process.env.QURAN_CLIENT_URL!, // Frontend URL from environment
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

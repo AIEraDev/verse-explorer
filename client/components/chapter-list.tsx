@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,19 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Search, Loader2 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useChapters } from "@/hooks/use-chapters";
-
-interface Chapter {
-  id: number;
-  chapter_number: number;
-  name_simple: string;
-  name_arabic: string;
-  translated_name: {
-    name: string;
-    language_name: string;
-  };
-  verses_count: number;
-  revelation_place: string;
-}
 
 export function ChapterList() {
   const { data, isLoading, error } = useChapters();
