@@ -38,8 +38,6 @@ export default function ChapterPage() {
     );
   }
 
-  console.log(translationId);
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
@@ -62,7 +60,10 @@ export default function ChapterPage() {
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="secondary">{chapterInfo.verses_count} verses</Badge>
-              <Badge variant="outline">{chapterInfo.revelation_place}</Badge>
+              <Badge variant="outline" className="capitalize">
+                {" "}
+                {chapterInfo.revelation_place}
+              </Badge>
             </div>
           </div>
         </div>
