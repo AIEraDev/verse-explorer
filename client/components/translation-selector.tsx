@@ -44,8 +44,6 @@ export function TranslationSelector({ value, onValueChange }: TranslationSelecto
     );
   }
 
-  console.log(translations);
-
   return (
     <div className="w-full">
       <Label className="font-bold text-xl mb-3">Translations</Label>
