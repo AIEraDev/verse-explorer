@@ -13,8 +13,8 @@ import { useParams } from "next/navigation";
 import { useChapter } from "@/hooks/use-chapters";
 
 export default function ChapterPage() {
-  const [translationId, setTranslationId] = useState("131");
-  const [reciterId, setReciterId] = useState("6"); // Mahmoud Khaleel Al-Husary (only working reciter)
+  const [translationId, setTranslationId] = useState("");
+  const [reciterId, setReciterId] = useState("");
   const { id: chapterId } = useParams();
 
   const { data, isLoading, error } = useChapter(chapterId as string);
@@ -37,6 +37,8 @@ export default function ChapterPage() {
       </div>
     );
   }
+
+  console.log(translationId);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">

@@ -20,9 +20,9 @@ export function ReciterSelector({ value, onValueChange }: ReciterSelectorProps) 
     if (reciters.length > 0 && !value) {
       onValueChange(reciters[0].id.toString());
     }
-  }, [reciters, value, onValueChange]);
+  }, [reciters]);
 
-  if (isLoading) {
+  if (isLoading || reciters.length === 0) {
     return (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Loader2 className="h-4 w-4 animate-spin" />

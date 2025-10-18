@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -61,8 +61,24 @@ export function VerseList({ chapterId, translationId, reciterId }: VerseListProp
   const { data, isLoading, error } = useVerses({ chapterId, translationId, perPage: 50 });
   const [playingVerse, setPlayingVerse] = useState<number | null>(null);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const verseRefs = useRef<{ [key: number]: HTMLElement | null }>({});
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const verses = data?.verses || [];
+
+  // Auto-scroll to the currently playing verse
+  useEffect(() => {
+    if (playingVerse !== null && verseRefs.current[playingVerse]) {
+      // Small delay to ensure the DOM has updated
+      const timer = setTimeout(() => {
+        verseRefs.current[playingVerse]?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [playingVerse]);
 
   const playAudio = async (verseNumber: number) => {
     try {
@@ -139,9 +155,15 @@ export function VerseList({ chapterId, translationId, reciterId }: VerseListProp
   }
 
   return (
-    <div className="space-y-6">
+    <div ref={containerRef} className="space-y-6">
       {verses.map((verse) => (
-        <Card key={verse.id} className="overflow-hidden">
+        <Card 
+          key={verse.id} 
+          className="overflow-hidden" 
+          ref={(el) => {
+            verseRefs.current[verse.verse_number] = el;
+          }}
+        >
           <CardHeader className="bg-muted/50">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base font-medium">Verse {verse.verse_number}</CardTitle>

@@ -29,12 +29,13 @@ export function TranslationSelector({ value, onValueChange }: TranslationSelecto
   const translations = data?.translations || [];
 
   useEffect(() => {
-    if (translations.length > 0) {
-      onValueChange(translations[0].id.toString());
+    if (translations.length > 0 && !value) {
+      const defaultId = translations[0].id.toString();
+      onValueChange(defaultId);
     }
-  }, [translations, value, onValueChange]);
+  }, [translations]);
 
-  if (isLoading) {
+  if (isLoading || translations.length === 0) {
     return (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Loader2 className="h-4 w-4 animate-spin" />
@@ -43,10 +44,12 @@ export function TranslationSelector({ value, onValueChange }: TranslationSelecto
     );
   }
 
+  console.log(translations);
+
   return (
     <div className="w-full">
       <Label className="font-bold text-xl mb-3">Translations</Label>
-      <Select value={value} onValueChange={onValueChange}>
+      <Select value={value || ""} onValueChange={onValueChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select translation" />
         </SelectTrigger>
