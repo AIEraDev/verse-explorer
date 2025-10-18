@@ -12,19 +12,19 @@
     "test": "node --test dist/test/*.test.js"
   },
   "dependencies": {
-    "axios": "^1.12.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.16",
+    "axios": "^1.6.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "lru-cache": "^10.1.0"
+    "lru-cache": "^10.2.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/node": "^22.18.10",
-    "nodemon": "^3.1.10",
+    "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }
